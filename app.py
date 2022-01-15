@@ -1,4 +1,5 @@
 import streamlit as st
+st.set_page_config(page_title="AlloCiné data visualization", page_icon=":bar_chart:", layout="wide")
 
 def Homepage():
     st.subheader('Dashboard')
@@ -28,5 +29,16 @@ def main_page():
         st.session_state.runpage = main_page
         st.session_state.runpage()
 
+
+# ---- HIDE STREAMLIT STYLE ----
+#  MainMenu {visibility: hidden;}
+#  footer {visibility: hidden;}
+#  header {visibility: hidden;}
+hide_st_style = """
+            <style>
+                footer {visibility: hidden;}
+            </style>
+            """
+st.markdown(hide_st_style, unsafe_allow_html=True)
 if __name__ == '__main__':
     main_page()
