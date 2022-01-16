@@ -1,34 +1,17 @@
 import streamlit as st
+from multiapp import MultiApp
+from apps import home, data, model # import your app modules here
+
 st.set_page_config(page_title="AlloCiné data visualization", page_icon=":bar_chart:", layout="wide")
 
-def Homepage():
-    st.subheader('Dashboard')
-    if st.button('Home', key="home"):
-        st.session_state.runpage = main_page
+app = MultiApp()
 
-def Viewpage():
-    st.subheader('View data page')
-    if st.button('HomePage', key="view"):
-        st.session_state.runpage = main_page
-
-def main_page():
-    st.write('')
-    btn1 = st.sidebar.button('Dashboard')
-    btn2 = st.sidebar.button('View Data')
-
-    if btn1:
-        st.session_state.runpage = Homepage
-        Homepage()
-
-    if btn2:
-        st.session_state.runpage = Viewpage
-        Viewpage()
-
-
-    if 'runpage' not in st.session_state:
-        st.session_state.runpage = main_page
-        st.session_state.runpage()
-
+# Add all your application here
+app.add_app("DashBoard", home.app)
+app.add_app("Data", data.app)
+app.add_app("Model", model.app)
+# The main app
+app.run()
 
 # ---- HIDE STREAMLIT STYLE ----
 #  MainMenu {visibility: hidden;}
@@ -40,5 +23,3 @@ hide_st_style = """
             </style>
             """
 st.markdown(hide_st_style, unsafe_allow_html=True)
-if __name__ == '__main__':
-    main_page()
