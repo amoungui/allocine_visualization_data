@@ -98,7 +98,7 @@ class Cleaner():
         df['press_rating'] = df['press_rating'].astype(str).str.strip().str.replace(',','.').str.replace('--','0').astype(float)
         df['spec_rating'] = df['spec_rating'].astype(str).str.strip().str.replace(',','.').str.replace('--','0').astype(float)        
 
-        df["release_date"] = pd.to_datetime(df["release_date"]) 
+        df["release_date"] = pd.to_datetime(df["release_date"])
 
         # drop NaN values
         df = df.dropna(subset=["press_rating", "spec_rating"]).reset_index(drop=True)

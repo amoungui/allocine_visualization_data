@@ -21,9 +21,10 @@ def app():
     df_s = clean_obj.movie_rating_cleaner()
     data = clean_obj.country_production()
     arr = clean_obj.insight_critics_cleaner(df_s)
+    allocine = clean_obj.convert_data(dataframe)
     
 
-    st.write(clean_obj.convert_data(dataframe))  
+    #st.write(clean_obj.convert_data(dataframe))  
 
     ## figure n_1
     fig1 = ploty.average_ratings(data)
@@ -42,8 +43,13 @@ def app():
     st.pyplot(fig4)
 
     ## figure n_5
-    #fig5 = ploty.ratings_distributions(allocine)
-    #st.pyplot(fig5)
+    fig5 = ploty.ratings_distributions(allocine)
+    st.pyplot(fig5)
 
+    ## figure n_6
+    fig6 = ploty.correlation_ratings(allocine)
+    st.pyplot(fig6)
 
-
+    ## figure n_7
+    fig7 = ploty.compare_to_users_ratings(allocine)
+    st.pyplot(fig7)

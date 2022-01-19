@@ -58,6 +58,26 @@ class Plotlyfy():
             ax.spines['right'].set_visible(False)        
 
 
+    def correlation_ratings(self, allocine):
+        ax = sb.jointplot(x="press_rating", y="spec_rating", 
+                        data=allocine, kind="hex",
+                        marginal_kws=dict(bins=20),
+                        xlim=(0.8,5.1), ylim=(0.8,5.1),
+                        size=7, space=0).set_axis_labels("Press Ratings", "Users Ratings")        
+
+    def compare_to_users_ratings(self, allocine):
+        five_stars = allocine[allocine["press_rating"] >= 5]
+
+        f, ax = plt.subplots(figsize=(15,6))
+        f.suptitle('Movies with Five Stars From The Press', 
+                fontsize=13)
+        f.subplots_adjust(top=0.85)
+
+        sb.countplot(five_stars["spec_rating"], ax=ax)
+        ax.set_xlabel("Users Ratings")
+        ax.set_ylabel("")
+        sb.despine(top=True, right=True, left=False, bottom=False)        
+    
     def first_insight(self, data:list):
         base_color=sb.color_palette()[0]
 
