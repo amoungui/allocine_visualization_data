@@ -5,15 +5,12 @@ from sklearn import datasets
 
 def app():
     st.title('Data')
-
-    st.write("This is the `Data` page of the multi-page app.")
-
-    st.write("The following is the DataFrame of the `iris` dataset.")
-
-    iris = datasets.load_iris()
-    X = pd.DataFrame(iris.data, columns = iris.feature_names)
-    Y = pd.Series(iris.target, name = 'class')
-    df = pd.concat([X,Y], axis=1)
-    df['class'] = df['class'].map({0:"setosa", 1:"versicolor", 2:"virginica"})
-
-    st.write(df)
+    filename = 'https://samoungui.com/wp-content/uploads/2022/01/allocine_movies_brute.csv'
+    
+    @st.cache
+    def load_data():
+        df = pd.read_csv(filename)
+        return df 
+    
+    data = load_data()
+    st.dataframe(data)
