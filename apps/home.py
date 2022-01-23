@@ -56,29 +56,36 @@ def app():
     ########################  visualization header| all plot   ##########################
     #####################################################################################
 
-    ## figure n_1
-    fig1 = ploty.average_ratings(data)
-    st.pyplot(fig1)
-    
-    ## figure n_2
-    fig2 = ploty.distribution(df_s)
-    st.pyplot(fig2)
-
-    ## figure n_3
-    fig3 = ploty.first_insight(arr)
-    st.pyplot(fig3)
-
-    ## figure n_4
-    fig4 = ploty.second_insight(df_s)
-    st.pyplot(fig4)
+    left_column_1, right_column_1 = st.columns(2)
+    with left_column_1:
+        ## figure n_1
+        fig1 = ploty.average_ratings(data)
+        st.pyplot(fig1)        
+    with right_column_1:
+        ## figure n_2
+        fig2 = ploty.distribution(df_s)
+        st.pyplot(fig2)
 
     ## figure n_5
-    fig5 = ploty.ratings_distributions(allocine)
+    fig4 = ploty.ratings_distributions(allocine)
+    st.pyplot(fig4)
+            
+    ## figure n_4
+    fig5 = ploty.second_insight(df_s)
     st.pyplot(fig5)
-
-    ## figure n_6
-    fig6 = ploty.correlation_ratings(allocine)
-    st.pyplot(fig6)
+            
+    ## figure n_3
+#    fig3 = ploty.first_insight(arr)
+#    st.pyplot(fig3)
+    
+    left_column_2, middle_column_2 = st.columns(2)
+    with left_column_2:
+        ## figure n_6
+        fig6_0 = ploty.correlation_ratings(allocine)
+        st.pyplot(fig6_0)
+    with middle_column_2:
+        fig6_1 = sns.jointplot(data=allocine, x="press_rating", y="spec_rating", kind='hist')
+        st.pyplot(fig6_1)
 
     ## figure n_7
     fig7 = ploty.compare_to_users_ratings(allocine)
@@ -90,15 +97,4 @@ def app():
 
     ## figure n_9
     fig9 = ploty.ploting_the_distribution(allocine)
-    st.pyplot(fig9)
-
-
-    allocine["diff_rating"] = (allocine["press_rating"] - allocine["spec_rating"]).abs()
-    # top Movies where users rating and press rating are the same
-    data = allocine[allocine["diff_rating"] == 0].sort_values(by="spec_rating", 
-                                                    ascending=False)[["title", "spec_rating", 
-                                                                        "press_rating", "diff_rating", 
-                                                                        "nb_press", "nb_spec"]].head(5)
-    st.write(data)        
-        
-        
+    st.pyplot(fig9) 

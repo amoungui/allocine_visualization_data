@@ -15,16 +15,15 @@ class Plotlyfy():
         pass 
     
     def average_ratings(self, data):
-        sb.lineplot(data=data ,x='nationality_1',y='value',hue='variable');
-        plt.xticks(rotation=20);
-        plt.xlabel('');
+        sb.lineplot(data=data ,x='nationality_1',y='value',hue='variable'); 
+        plt.xticks(rotation=20); 
+        plt.xlabel(''); 
         plt.ylabel('average ratings'); 
 
     def distribution(self, df_s):
         #plot the distribution of the variable depicting the gap between critics' and audience's ratings.   
-
-        bin_edge=np.arange(-3,3,0.1);
-        plt.hist(data=df_s,x='diff',bins=bin_edge);          
+        bin_edge=np.arange(-3,3,0.1); 
+        plt.hist(data=df_s,x='diff',bins=bin_edge, color='C0'); #, histtype = 'step'         
 
     def ratings_distributions(self, df):
         sb.set(style="white", palette="deep")
@@ -89,20 +88,20 @@ class Plotlyfy():
         plt.ylabel('')        
 
 
-    def second_insight(self, df_s):
+    def second_insight(self, df_s):        
         base_color=sb.color_palette()[0]
         l=df_s.groupby(['directors'],as_index=False).count().sort_values(by="diff").tail(50)['directors'].tolist()
         df_3 = df_s[df_s.directors.isin(l)].groupby(['directors'],as_index=False).mean().sort_values(by='diff')
 
-        plt.figure(figsize=[20,6]);
-        sb.boxplot(data=df_3,x='directors',y='diff',color=base_color);
-        plt.xticks(rotation=90);
-        plt.title('40 out of 50 top directors have average higher critics ratings than audiences');
-        plt.xlabel('');
-        plt.ylabel('gap: average rating per critics minus audience rating');
-        x_coordinates = [1, 50];
-        y_coordinates = [0, 0];
-        plt.plot(x_coordinates, y_coordinates);
+        plt.figure(figsize=[20,6])
+        sb.boxplot(data=df_3,x='directors',y='diff',color=base_color) 
+        plt.xticks(rotation=90)
+        plt.title('40 out of 50 top directors have average higher critics ratings than audiences')
+        plt.xlabel('')
+        plt.ylabel('gap: average rating per critics minus audience rating'); 
+        x_coordinates = [1, 50] 
+        y_coordinates = [0, 0] 
+        plt.plot(x_coordinates, y_coordinates)
 
 
     def five_star_movie(self, allocine):
@@ -153,6 +152,8 @@ class Plotlyfy():
         ax3.text(2007, 10, '{}%'.format(round((right97 / (left97 + right97)) * 100, 1)), ha='center', va='bottom', color='C0')
         ax3.axvline(x=1997, color="C0", label="Launch of AlloCiné", linestyle="--", linewidth=1.5)
         ax3.legend(loc = "upper left"); 
+
+
         
     def ploting_the_distribution(self, allocine):
         allocine["diff_rating"] = (allocine["press_rating"] - allocine["spec_rating"]).abs()
@@ -185,5 +186,3 @@ class Plotlyfy():
         ax3.set_xlabel("Absolute Difference")
 
         sb.despine(top=True, right=True, left=False, bottom=False)
-
-
