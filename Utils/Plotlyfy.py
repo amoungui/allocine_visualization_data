@@ -4,8 +4,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import warnings
 import seaborn as sb # sns
-
-import ast
+import plotly.express as px
+#import ast
 import matplotlib.pyplot as plt
 
 warnings.filterwarnings("ignore")
@@ -15,7 +15,7 @@ class Plotlyfy():
         pass 
     
     def average_ratings(self, data):
-        sb.pointplot(data=data ,x='nationality_1',y='value',hue='variable');
+        sb.lineplot(data=data ,x='nationality_1',y='value',hue='variable');
         plt.xticks(rotation=20);
         plt.xlabel('');
         plt.ylabel('average ratings'); 
@@ -105,25 +105,85 @@ class Plotlyfy():
         plt.plot(x_coordinates, y_coordinates);
 
 
-    def plotly_charts(self, df, labels):
-        df = df.select_dtypes(['float64', 'float32', 'int32', 'int64']).columns 
-        fig, ax = plt.subplots()
+    def five_star_movie(self, allocine):
+        five_stars = allocine[allocine["press_rating"] >= 5]
+        fig, axes = plt.subplots(1, 3, figsize = (16,4))
+        fig.suptitle('Movies with Five Stars From The Press', fontsize=14, fontweight='bold')
+        fig.subplots_adjust(top=0.75)
+        ax1, ax2, ax3 = fig.axes
 
-        box = ax.get_position()
-        ax.set_position([box.x0, box.y0, box.width * 1.3, box.height])
+        # fig 1
+        ax1.set_xlim([1925,2017])
+        ax1.set_title("Distribution of Movies\nby Year of Release\n")
+        # years distribution of the five stars
+        sb.distplot(five_stars["release_date"].dt.year.dropna(), ax=ax1, 
+                    axlabel="Year of Release", label="Five Stars Movies", bins=10, 
+                    norm_hist=True, kde=False,
+                    hist_kws={"alpha": 0.9, "color": "C5"})
 
-        ax.pie(df, labels=labels, explode=(0, 0.05), autopct = "%0.2f%%") # explode=(0, 0.05, 0, 0)
+        # years distribution of all the data
+        sb.distplot(allocine["release_date"].dt.year.dropna(), ax=ax1, 
+                    axlabel="Year of Release", label="Full Dataset", bins=10, 
+                    norm_hist=True, kde=False,
+                    hist_kws={"alpha": 0.85, "color": "C1"})
 
-        total = sum(df)
-        plt.legend(
-            loc='upper left',
-            labels=['%s, %1.1f%%' % (
-                l, (float(s) / total) * 100) for l, s in zip(labels, df)],
-            prop={'size': 12},
-            bbox_to_anchor=(0.0, 1),
-            bbox_transform=fig.transFigure
-        )
+        ax1.axvline(x=1997, color="C0", label="Launch of AlloCiné", linestyle="--", linewidth=1.5)
+        ax1.legend(loc = "upper left")
 
-        return fig
+        # fig 2
+        sb.countplot(five_stars["nb_press"], ax=ax2)
+        ax2.set_xlabel("Number of Press Votes")
+        ax2.set_title("Distribution of Movies\nby the Number of Press Votes\n")
+        sb.despine(top=True, right=True, left=False, bottom=False)
+        
+        # fig 3
+        # years distribution of all the data
+        ax3.set_xlim([1935,2017])
+        ax3.set_title("Distribution of Movies\nwith only one Press Vote\nby Year of Release")
+        # years distribution of the view
+        fs_nbp = five_stars[five_stars["nb_press"] == 1]
+        left97 = len(fs_nbp[fs_nbp["release_date"].dt.year < 1997])
+        right97 = len(fs_nbp[fs_nbp["release_date"].dt.year >= 1997])
+        sb.distplot(fs_nbp["release_date"].dt.year.dropna(), ax=ax3, 
+                    axlabel="Year of Release", label="Five Stars Movies", bins=4, 
+                    norm_hist=False, kde=False,
+                    hist_kws={"alpha": 0.9, "color": "C5"})
+
+        ax3.text(1967, 10, '{}%'.format(round((left97 / (left97 + right97)) * 100, 1)), ha='center', va='bottom', color='C0')
+        ax3.text(2007, 10, '{}%'.format(round((right97 / (left97 + right97)) * 100, 1)), ha='center', va='bottom', color='C0')
+        ax3.axvline(x=1997, color="C0", label="Launch of AlloCiné", linestyle="--", linewidth=1.5)
+        ax3.legend(loc = "upper left"); 
+        
+    def ploting_the_distribution(self, allocine):
+        allocine["diff_rating"] = (allocine["press_rating"] - allocine["spec_rating"]).abs()
+        f, ax = plt.subplots(1, 3, figsize = (16,4))
+        f.suptitle('Distribution of Difference Between Ratings', 
+                fontsize=14, fontweight='bold')
+        f.subplots_adjust(top=0.75)
+        ax1, ax2, ax3 = f.axes
+
+        ax1.set_xlim([0,3])
+        ax1.set_title("Distribution for\nUsers Ratings < Press Ratings")
+        sb.distplot(allocine.loc[allocine["spec_rating"] < allocine["press_rating"], "diff_rating"], ax=ax1, bins=7, 
+                    norm_hist=True, kde=False,
+                    hist_kws={"alpha": 0.85, "color": "C0"})
+
+        ax1.set_xlabel("Absolute Difference")
+
+        ax2.set_xlim([0,3])
+        ax2.set_title("Distribution for\nUsers Ratings > Press Ratings")
+        sb.distplot(allocine.loc[allocine["spec_rating"] > allocine["press_rating"], "diff_rating"], ax=ax2, bins=7, 
+                    norm_hist=True, kde=False,
+                    hist_kws={"alpha": 0.85, "color": "C2"})
+        ax2.set_xlabel("Absolute Difference")
+
+        ax3.set_xlim([0,3])
+        ax3.set_title("Distribution of absolute difference for\nall the data")
+        sb.distplot(allocine.loc[:, "diff_rating"], ax=ax3, bins=7, 
+                    norm_hist=True, kde=False,
+                    hist_kws={"alpha": 0.85, "color": "C1"})
+        ax3.set_xlabel("Absolute Difference")
+
+        sb.despine(top=True, right=True, left=False, bottom=False)
 
 
