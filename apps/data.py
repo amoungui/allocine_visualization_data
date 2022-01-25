@@ -44,8 +44,8 @@ def show():
         col1.write("")  # this makes the empty column show up on mobile
 
     col2.write(f"Page {1+st.session_state.page} of {5}")
-    start = 30 * st.session_state.page
-    end = start + 30
+    start = 10 * st.session_state.page
+    end = start + 10
     st.write("")
     st.write(load_data().iloc[start:end])
 

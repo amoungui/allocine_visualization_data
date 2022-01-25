@@ -42,12 +42,15 @@ def app():
     with left_column:
         st.markdown("#### Total Movies:")
         st.markdown("#### {}".format(total_movies))
+    
     with middle_column_1:
         st.markdown("#### Average rating press:")
         st.markdown("#### {} {}".format(average_rating_press, start_rating_press))
+    
     with middle_column_2:
         st.markdown("#### Average rating user:")
         st.markdown("#### {} {}".format(average_rating_spec, start_rating_spec))
+    
     with right_column:
         st.markdown("#### Average number of user:")
         st.markdown("#### {}".format(average_nb_spec))
@@ -56,11 +59,13 @@ def app():
     ########################  visualization header| all plot   ##########################
     #####################################################################################
 
-    left_column_1, right_column_1 = st.columns(2)
+    left_column_1, right_column_1 = st.beta_columns(2)
+    
     with left_column_1:
         ## figure n_1
         fig1 = ploty.average_ratings(data)
         st.pyplot(fig1)        
+    
     with right_column_1:
         ## figure n_2
         fig2 = ploty.distribution(df_s)
@@ -78,11 +83,13 @@ def app():
 #    fig3 = ploty.first_insight(arr)
 #    st.pyplot(fig3)
     
-    left_column_2, middle_column_2 = st.columns(2)
+    left_column_2, middle_column_2 = st.beta_columns(2)
+    
     with left_column_2:
         ## figure n_6
         fig6_0 = ploty.correlation_ratings(allocine)
         st.pyplot(fig6_0)
+        
     with middle_column_2:
         fig6_1 = sns.jointplot(data=allocine, x="press_rating", y="spec_rating", kind='hist')
         st.pyplot(fig6_1)
