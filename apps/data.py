@@ -6,18 +6,14 @@ from Utils.Cleaner import Cleaner as cleaner
 filename = 'https://samoungui.com/wp-content/uploads/2022/01/allocine_movies_brute.csv'
 @st.cache
 def load_data():
-    # cleaning dataset brut
-    clean_obj = cleaner(filename)
-    data = clean_obj.movie_rating_cleaner()  
+    data = pd.read_csv(filename) 
     return data
 
 def show():
     st.write(
         """
-        ## 📑 Pagination
-        
-        Too much data to display? Now you can paginate through items (e.g. a table), 
-        storing the current page number in `st.session_state`. 
+        ## 📑 AlloCiné movies data
+     
         """
     )
     
@@ -45,11 +41,10 @@ def show():
 
     col2.write(f"Page {1+st.session_state.page} of {5}")
     start = 30 * st.session_state.page
-    end = start + 10
+    end = start + 30
     st.write("")
     st.write(load_data().iloc[start:end])
 
 
 def app():
-    st.title('Data')
     show()
