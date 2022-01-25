@@ -37,7 +37,7 @@ def app():
     average_nb_press = round(allocine['nb_press'].mean(), 2)
     average_nb_spec = round(allocine['nb_spec'].mean(), 2)
 
-    left_column, middle_column_1,middle_column_2, right_column = st.columns(4)
+    left_column, middle_column_1,middle_column_2, right_column = st.beta_columns(4)
 
     with left_column:
         st.markdown("#### Total Movies:")
