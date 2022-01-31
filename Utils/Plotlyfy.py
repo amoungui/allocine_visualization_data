@@ -5,7 +5,6 @@ import matplotlib.pyplot as plt
 import warnings
 import seaborn as sb # sns
 import plotly.express as px
-#import ast
 import matplotlib.pyplot as plt
 
 warnings.filterwarnings("ignore")
@@ -15,20 +14,38 @@ class Plotlyfy():
         pass 
     
     def average_ratings(self, data):
+        """display lineplot of dataset that you give in parameter
+        Args:
+            dataset (dataset)
+        Returns:
+            None
+        """        
         sb.lineplot(data=data ,x='nationality_1',y='value',hue='variable'); 
         plt.xticks(rotation=20); 
         plt.xlabel(''); 
         plt.ylabel('average ratings'); 
 
     def distribution(self, df_s):
+        """display histplot of dataset that you give in parameter
+        Args:
+            dataset (dataset)
+        Returns:
+            None
+        """        
         #plot the distribution of the variable depicting the gap between critics' and audience's ratings.   
-        bin_edge=np.arange(-3,3,0.1); 
-        plt.hist(data=df_s,x='diff',bins=bin_edge, color='C0'); #, histtype = 'step'         
+        bin_edge=np.arange(-3,3,0.1); # generate value between -3 and 3 with 0.1 step 
+        plt.hist(data=df_s,x='diff',bins=bin_edge, color='C0');       
 
     def ratings_distributions(self, df):
+        """display hist of dataset that you give in parameter
+        Args:
+            dataset (dataset)
+        Returns:
+            None
+        """         
         sb.set(style="white", palette="deep")
 
-        fig, axes = plt.subplots(1, 3, figsize = (16,4))
+        fig, axes = plt.subplots(1, 3, figsize = (16,4)) # we create subplot we 1 row and 3 columns and we define figure size
         ax1, ax2, ax3 = fig.axes
 
         ax1.set_xlim([0.5,5.5])
@@ -52,12 +69,18 @@ class Plotlyfy():
         ax3.set_title('Comparison of Distributions')
         ax3.set_xlabel('Ratings')
 
-        for ax in fig.axes:
+        for ax in fig.axes: # loop axes of fig to display each ax
             ax.spines['top'].set_visible(False)
             ax.spines['right'].set_visible(False)        
 
 
     def correlation_ratings(self, allocine):
+        """Use joinplot to plot the dataset that you give in parameter and display the correlation data
+        Args:
+            dataset (dataset)
+        Returns:
+            None
+        """                 
         ax = sb.jointplot(x="press_rating", y="spec_rating", 
                         data=allocine, kind="hex",
                         marginal_kws=dict(bins=20),
@@ -65,6 +88,12 @@ class Plotlyfy():
                         size=7, space=0).set_axis_labels("Press Ratings", "Users Ratings")        
 
     def compare_to_users_ratings(self, allocine):
+        """display countplot to plot the dataset that you give in parameter
+        Args:
+            dataset (dataset)
+        Returns:
+            None
+        """        
         five_stars = allocine[allocine["press_rating"] >= 5]
 
         f, ax = plt.subplots(figsize=(15,6))
@@ -78,7 +107,13 @@ class Plotlyfy():
         sb.despine(top=True, right=True, left=False, bottom=False)        
     
     def first_insight(self, data:list):
-        base_color=sb.color_palette()[0]
+        """display boxplot to plot the dataset that you give in parameter
+        Args:
+            dataset (dataset)
+        Returns:
+            None
+        """                
+        base_color=sb.color_palette()[0] # define color palette
 
         plt.figure(figsize=[10,5])
         sb.boxplot(data=data[1],y='genre_1',x='diff_x',order=data[2].index,color=base_color)
@@ -88,8 +123,14 @@ class Plotlyfy():
         plt.ylabel('')        
 
 
-    def second_insight(self, df_s):        
-        base_color=sb.color_palette()[0]
+    def second_insight(self, df_s): 
+        """display boxplot to plot the dataset that you give in parameter
+        Args:
+            dataset (dataset)
+        Returns:
+            None
+        """                   
+        base_color=sb.color_palette()[0] # define color palette
         l=df_s.groupby(['directors'],as_index=False).count().sort_values(by="diff").tail(50)['directors'].tolist()
         df_3 = df_s[df_s.directors.isin(l)].groupby(['directors'],as_index=False).mean().sort_values(by='diff')
 
@@ -105,6 +146,14 @@ class Plotlyfy():
 
 
     def five_star_movie(self, allocine):
+        """Display distribution of Movies by Year of Release
+           Distribution of Movies by the Number of Press Votes
+           Distribution of Movies with only one Press Vote by Year of Release
+        Args:
+            dataset (dataset)
+        Returns:
+            None
+        """        
         five_stars = allocine[allocine["press_rating"] >= 5]
         fig, axes = plt.subplots(1, 3, figsize = (16,4))
         fig.suptitle('Movies with Five Stars From The Press', fontsize=14, fontweight='bold')
@@ -153,9 +202,16 @@ class Plotlyfy():
         ax3.axvline(x=1997, color="C0", label="Launch of AlloCiné", linestyle="--", linewidth=1.5)
         ax3.legend(loc = "upper left"); 
 
-
         
     def ploting_the_distribution(self, allocine):
+        """Display distribution for Users Ratings < Press Ratings
+           Distribution for Users Ratings > Press Ratings
+           Distribution of absolute difference for all the data
+        Args:
+            dataset (dataset)
+        Returns:
+            None
+        """        
         allocine["diff_rating"] = (allocine["press_rating"] - allocine["spec_rating"]).abs()
         f, ax = plt.subplots(1, 3, figsize = (16,4))
         f.suptitle('Distribution of Difference Between Ratings', 

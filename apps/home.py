@@ -17,9 +17,10 @@ dataframe = 'https://samoungui.com/wp-content/uploads/2022/01/allocine_movies_br
 
 def app():
     st.title('DashBoard')
-    ploty = ply(dataframe)
-    # cleaning dataset brut
-    clean_obj = cleaner(dataframe)
+    # instanciation of class
+    ploty = ply(dataframe) 
+    clean_obj = cleaner(dataframe) # cleaning dataset brut
+    # initialization of dataframe 
     df_s = clean_obj.movie_rating_cleaner()
     data = clean_obj.country_production()
     arr = clean_obj.insight_critics_cleaner(df_s)
@@ -29,29 +30,33 @@ def app():
     ########################  visualization header| TOP KPI's  ##########################
     #####################################################################################
 
-    total_movies = int(allocine['title'].count())
-    average_rating_press = round(allocine['press_rating'].mean(), 1)
-    average_rating_spec = round(allocine['spec_rating'].mean(), 1)
-    start_rating_press = ":star:"*int(round(average_rating_press, 0))
-    start_rating_spec = ":star:"*int(round(average_rating_spec, 0))
-    average_nb_press = round(allocine['nb_press'].mean(), 2)
-    average_nb_spec = round(allocine['nb_spec'].mean(), 2)
+    total_movies = int(allocine['title'].count()) # we get here a total of movies that appear in the allocine dataset
+    average_rating_press = round(allocine['press_rating'].mean(), 1) # we get average of press rating
+    average_rating_spec = round(allocine['spec_rating'].mean(), 1) # we get average of user rating
+    start_rating_press = ":star:"*int(round(average_rating_press, 0)) # we get the number of star according press rating
+    start_rating_spec = ":star:"*int(round(average_rating_spec, 0)) # we get the number of star according user rating
+    average_nb_press = round(allocine['nb_press'].mean(), 2) # we get average of number of press
+    average_nb_spec = round(allocine['nb_spec'].mean(), 2) # we get average of number of spectator
 
     left_column, middle_column_1,middle_column_2, right_column = st.beta_columns(4)
 
-    with left_column:
+    with left_column: 
+        # display here the total of movies 
         st.markdown("#### Total Movies:")
         st.markdown("#### {}".format(total_movies))
     
     with middle_column_1:
+        # display here average press rating and the average of number of star
         st.markdown("#### Average rating press:")
         st.markdown("#### {} {}".format(average_rating_press, start_rating_press))
     
     with middle_column_2:
+        # display here average user rating and the average of number of star
         st.markdown("#### Average rating user:")
         st.markdown("#### {} {}".format(average_rating_spec, start_rating_spec))
     
     with right_column:
+        # display here average of spectator 
         st.markdown("#### Average number of user:")
         st.markdown("#### {}".format(average_nb_spec))
     st.markdown("---")                
