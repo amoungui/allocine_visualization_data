@@ -63,7 +63,7 @@ def app():
     #####################################################################################
     ########################  visualization header| all plot   ##########################
     #####################################################################################
-    st.markdown('#### Distribution of rating difference')
+    st.markdown('#### Distribution of rating difference\n')
     left_column_1, right_column_1 = st.beta_columns(2)
     
     with left_column_1:
@@ -77,17 +77,19 @@ def app():
         st.pyplot(fig2)
 
     ## figure n_5
+    st.markdown('#### Génerale Analysis of Notes and Distributions of Notes\n')
     fig4 = ploty.ratings_distributions(allocine)
     st.pyplot(fig4)
             
     ## figure n_4
+    st.markdown('#### 50 top directors have average higher critics ratings than audiences\n')
     fig5 = ploty.second_insight(df_s)
     st.pyplot(fig5)
             
     ## figure n_3
 #    fig3 = ploty.first_insight(arr)
 #    st.pyplot(fig3)
-    st.markdown('### Correlation of differents notations')
+    st.markdown('#### Correlation of differents notations')
     left_column_2, middle_column_2 = st.beta_columns(2)
     
     with left_column_2:
