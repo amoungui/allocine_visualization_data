@@ -22,7 +22,7 @@ class Plotlyfy():
         """        
         sb.lineplot(data=data ,x='nationality_1',y='value',hue='variable'); 
         plt.xticks(rotation=20); 
-        plt.set_title('average rating by nationality')
+        #plt.set_title('average rating by nationality')
         plt.xlabel(''); 
         plt.ylabel('average ratings'); 
 

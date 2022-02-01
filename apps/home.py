@@ -63,9 +63,9 @@ def app():
     #####################################################################################
     ########################  visualization header| all plot   ##########################
     #####################################################################################
-
-    left_column_1, right_column_1 = st.beta_columns(2)
     st.markdown('### Correlation of differents notations')
+    left_column_1, right_column_1 = st.beta_columns(2)
+    
     with left_column_1:
         ## figure n_1
         fig1 = ploty.average_ratings(data)
@@ -87,9 +87,9 @@ def app():
     ## figure n_3
 #    fig3 = ploty.first_insight(arr)
 #    st.pyplot(fig3)
-    
-    left_column_2, middle_column_2 = st.beta_columns(2)
     st.markdown('### Correlation of differents notations')
+    left_column_2, middle_column_2 = st.beta_columns(2)
+    
     with left_column_2:
         ## figure n_6
         fig6_0 = ploty.correlation_ratings(allocine)
