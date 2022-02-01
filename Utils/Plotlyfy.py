@@ -45,7 +45,7 @@ class Plotlyfy():
             None
         """         
         sb.set(style="white", palette="deep")
-
+        
         fig, axes = plt.subplots(1, 3, figsize = (16,4)) # we create subplot we 1 row and 3 columns and we define figure size
         ax1, ax2, ax3 = fig.axes
 
@@ -81,7 +81,12 @@ class Plotlyfy():
             dataset (dataset)
         Returns:
             None
-        """                 
+        """           
+        f, ax = plt.subplots(figsize=(15,6))
+        f.suptitle('Correlation between press ratings and users ratings', 
+                fontsize=13)
+        f.subplots_adjust(top=0.85)
+                      
         ax = sb.jointplot(x="press_rating", y="spec_rating", 
                         data=allocine, kind="hex",
                         marginal_kws=dict(bins=20),
