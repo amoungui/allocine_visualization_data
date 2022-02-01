@@ -65,7 +65,7 @@ def app():
     #####################################################################################
 
     left_column_1, right_column_1 = st.beta_columns(2)
-    
+    st.markdown('### Correlation of differents notations')
     with left_column_1:
         ## figure n_1
         fig1 = ploty.average_ratings(data)
@@ -89,7 +89,7 @@ def app():
 #    st.pyplot(fig3)
     
     left_column_2, middle_column_2 = st.beta_columns(2)
-    
+    st.markdown('### Correlation of differents notations')
     with left_column_2:
         ## figure n_6
         fig6_0 = ploty.correlation_ratings(allocine)
