@@ -106,19 +106,19 @@ def app():
         st.pyplot(fig6_1)
 
     ## figure n_7
-    st.markdown('#### 7')
+    st.markdown('#### Compare Movies with Five Stars From The Press')
     st.write('\n\n')    
     fig7 = ploty.compare_to_users_ratings(allocine)
     st.pyplot(fig7)
 
     ## figure n_8
-    st.markdown('#### 8')
+    st.markdown('#### Movies with Five Stars From The Press')
     st.write('\n\n')
     fig8 = ploty.five_star_movie(allocine)
     st.pyplot(fig8)
 
     ## figure n_9
-    st.markdown('#### 9')
+    st.markdown('#### Distribution of Difference Between Ratings and Absolute Difference')
     st.write('\n\n')
     fig9 = ploty.ploting_the_distribution(allocine)
     st.pyplot(fig9) 
