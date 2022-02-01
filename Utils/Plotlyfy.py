@@ -83,11 +83,7 @@ class Plotlyfy():
         Returns:
             None
         """           
-        f, ax = plt.subplots(figsize=(15,6))
-        f.suptitle('Correlation between press ratings and users ratings', 
-                fontsize=13)
-        f.subplots_adjust(top=0.85)
-                      
+        plt.title("Correlation of différentes notations")   
         ax = sb.jointplot(x="press_rating", y="spec_rating", 
                         data=allocine, kind="hex",
                         marginal_kws=dict(bins=20),
