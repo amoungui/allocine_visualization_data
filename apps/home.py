@@ -63,7 +63,7 @@ def app():
     #####################################################################################
     ########################  visualization header| all plot   ##########################
     #####################################################################################
-    st.markdown('### Correlation of differents notations')
+    st.markdown('#### Distribution of rating difference')
     left_column_1, right_column_1 = st.beta_columns(2)
     
     with left_column_1:
