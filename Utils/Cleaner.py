@@ -32,21 +32,25 @@ class Cleaner():
         #Select only movies with ratings from both critics and audience
         df_s= self.df[self.df.press_rating.notnull() & self.df.spec_rating.notnull()]  
                
-        df_s['genres']=df_s['genres'].apply(lambda x : x.replace('[','').replace(',,',',')) 
-        df_s['genres']=df_s['genres'].apply(lambda x : x.replace(']','').replace(',,',','))
-        df_s['genres']=df_s['genres'].apply(lambda x : x.replace("'",'').replace(',,',','))
+        df_s['genres']=df_s['genres'].apply(lambda x : x.replace('[','')) 
+        df_s['genres']=df_s['genres'].apply(lambda x : x.replace(']',''))
+        df_s['genres']=df_s['genres'].apply(lambda x : x.replace("'",''))
+        df_s['genres']=df_s['genres'].apply(lambda x : x.replace(',,',','))
 
-        df_s['directors']=df_s['directors'].apply(lambda x : x.replace('[','').replace(',,',',')) 
-        df_s['directors']=df_s['directors'].apply(lambda x : x.replace(']','').replace(',,',','))
-        df_s['directors']=df_s['directors'].apply(lambda x : x.replace("'",'').replace(',,',','))
+        df_s['directors']=df_s['directors'].apply(lambda x : x.replace('[','')) 
+        df_s['directors']=df_s['directors'].apply(lambda x : x.replace(']',''))
+        df_s['directors']=df_s['directors'].apply(lambda x : x.replace("'",''))
+        df_s['directors']=df_s['directors'].apply(lambda x : x.replace(',,',','))
 
-        df_s['actors']=df_s['actors'].apply(lambda x : x.replace('[','').replace(',,',',')) 
-        df_s['actors']=df_s['actors'].apply(lambda x : x.replace(']','').replace(',,',','))
-        df_s['actors']=df_s['actors'].apply(lambda x : x.replace("'",'').replace(',,',','))
+        df_s['actors']=df_s['actors'].apply(lambda x : x.replace('[','')) 
+        df_s['actors']=df_s['actors'].apply(lambda x : x.replace(']',''))
+        df_s['actors']=df_s['actors'].apply(lambda x : x.replace("'",''))
+        df_s['actors']=df_s['actors'].apply(lambda x : x.replace(',,',','))
 
-        df_s['nationality']=df_s['nationality'].apply(lambda x : x.replace('[','').replace(',,',',')) 
-        df_s['nationality']=df_s['nationality'].apply(lambda x : x.replace(']','').replace(',,',','))
-        df_s['nationality']=df_s['nationality'].apply(lambda x : x.replace("'",'').replace(',,',','))  
+        df_s['nationality']=df_s['nationality'].apply(lambda x : x.replace('[','')) 
+        df_s['nationality']=df_s['nationality'].apply(lambda x : x.replace(']',''))
+        df_s['nationality']=df_s['nationality'].apply(lambda x : x.replace("'",''))
+        df_s['nationality']=df_s['nationality'].apply(lambda x : x.replace(',,',','))  
         
         return df_s  
 
