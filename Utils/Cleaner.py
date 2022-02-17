@@ -50,7 +50,7 @@ class Cleaner():
         df_s['nationality']=df_s['nationality'].apply(lambda x : x.replace('[','')) 
         df_s['nationality']=df_s['nationality'].apply(lambda x : x.replace(']',''))
         df_s['nationality']=df_s['nationality'].apply(lambda x : x.replace("'",''))
-        df_s['nationality']=df_s['nationality'].apply(lambda x : x.replace(',,',','))  
+        df_s['nationality']=df_s['nationality'].apply(lambda x : x.replace(',,',',').replace(',, ', ', '))  
         
         return df_s  
 
