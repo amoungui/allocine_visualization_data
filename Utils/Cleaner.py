@@ -47,8 +47,8 @@ class Cleaner():
         df_s['actors']=df_s['actors'].apply(lambda x : x.replace("'",''))
         df_s['actors']=df_s['actors'].apply(lambda x : x.replace(',,',','))
 
-        df_s['nationality']=df_s['nationality'].apply(lambda x : x.replace('[','')) 
-        df_s['nationality']=df_s['nationality'].apply(lambda x : x.replace(']',''))
+        df_s['nationality']=df_s['nationality'].apply(lambda x : x.replace('[','').replace(',, ', ', ')) 
+        df_s['nationality']=df_s['nationality'].apply(lambda x : x.replace(']','').replace(',, ', ', '))
         df_s['nationality']=df_s['nationality'].apply(lambda x : x.replace("'",''))
         df_s['nationality']=df_s['nationality'].apply(lambda x : x.replace(',,',',').replace(',, ', ', '))  
         
