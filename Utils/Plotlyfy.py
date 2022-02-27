@@ -36,7 +36,7 @@ class Plotlyfy():
         #plot the distribution of the variable depicting the gap between critics' and audience's ratings.   
         bin_edge=np.arange(-3,3,0.1); # generate value between -3 and 3 with 0.1 step 
         plt.title('Distribution of rating difference')
-        plt.hist(data=df_s,x='diff', bins=bin_edge, color='C0');       
+        plt.hist(data=df_s,x='diff', bins=10, color='C0');       
 
     def ratings_distributions(self, df):
         """display hist of dataset that you give in parameter
