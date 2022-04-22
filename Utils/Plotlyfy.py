@@ -164,7 +164,7 @@ class Plotlyfy():
         ax1, ax2, ax3 = fig.axes
 
         # fig 1
-        ax1.set_xlim([1925,2017])
+        ax1.set_xlim([1925,2022])
         ax1.set_title("Distribution of Movies\nby Year of Release\n")
         # years distribution of the five stars
         sb.distplot(five_stars["release_date"].dt.year.dropna(), ax=ax1, 
@@ -189,7 +189,7 @@ class Plotlyfy():
         
         # fig 3
         # years distribution of all the data
-        ax3.set_xlim([1935,2017])
+        ax3.set_xlim([1935,2022])
         ax3.set_title("Distribution of Movies\nwith only one Press Vote\nby Year of Release")
         # years distribution of the view
         fs_nbp = five_stars[five_stars["nb_press"] == 1]
@@ -199,9 +199,8 @@ class Plotlyfy():
                     axlabel="Year of Release", label="Five Stars Movies", bins=4, 
                     norm_hist=False, kde=False,
                     hist_kws={"alpha": 0.9, "color": "C5"})
-
-        ax3.text(1967, 10, '{}%'.format(round((left97 / (left97 + right97)) * 100, 1)), ha='center', va='bottom', color='C0')
-        ax3.text(2007, 10, '{}%'.format(round((right97 / (left97 + right97)) * 100, 1)), ha='center', va='bottom', color='C0')
+#        ax3.text(1967, 10, '{}%'.format(round((left97 / (left97 + right97)) * 100, 1)))
+#        ax3.text(2022, 10, '{}%'.format(round((right97 / (left97 + right97)) * 100, 1)))
         ax3.axvline(x=1997, color="C0", label="Launch of AlloCiné", linestyle="--", linewidth=1.5)
         ax3.legend(loc = "upper left"); 
 
