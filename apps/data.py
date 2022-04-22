@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 from Utils.Cleaner import Cleaner as cleaner
 
-filename = 'https://samoungui.com/wp-content/uploads/2022/01/allocine_movies_brute.csv'
+filename = 'https://samoungui.com/wp-content/uploads/2022/04/allocine_movies_brute.csv'
 
 @st.cache
 def load_data():    
