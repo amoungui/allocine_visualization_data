@@ -13,7 +13,7 @@ from Utils.Plotlyfy import Plotlyfy as ply
 # set the style for seaborn
 sns.set_style('whitegrid') 
 st.set_option('deprecation.showPyplotGlobalUse', False)
-dataframe = 'https://samoungui.com/wp-content/uploads/2022/04/allocine_movies_brute.csv'
+dataframe = 'https://samoungui.com/wp-content/uploads/2022/05/allocine_movies_brute.csv'
 
 def app():
     st.title('DashBoard')
